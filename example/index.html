@@ -60,6 +60,13 @@
 	<a href="" ng-click="openConfirmWithPreCloseCallbackInlinedWithNestedConfirm()">Open confirm modal with pre-close inlined with nested confirm.</a>
 	<a href="" ng-click="openWithoutOverlay()">Open without overlay</a>
 
+
+	<a href="" ng-click="openWithSize({width: '800px', height: '600px'})">Open with custom size 800x600</a>
+	<a href="" ng-click="openWithSize({width: '200px', height: '200px'})">Open with custom size 200x200</a>
+	<a href="" ng-click="openWithSize({width: 'auto', height: 'auto'})">Open with custom size autoxauto</a>
+
+
+
 	<!-- Templates -->
 
 	<script type="text/ng-template" id="firstDialogId">
@@ -146,6 +153,14 @@
 		app.controller('MainCtrl', function ($scope, $rootScope, ngDialog) {
 			$rootScope.jsonData = '{"foo": "bar"}';
 			$rootScope.theme = 'ngdialog-theme-default';
+
+			$scope.openWithSize = function(size){
+					ngDialog.open({
+					template: '<center><h6>' + size.width + ' X ' + size.height + '</h6></center>',
+					plain: true,
+					size: size
+				});
+			};
 
 			$scope.directivePreCloseCallback = function (value) {
 				if(confirm('Close it? MainCtrl.Directive. (Value = ' + value + ')')) {
